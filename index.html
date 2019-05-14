@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Huizi's toolbox</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+	*{
+	box-sizing: border-box;
+	}
+	
+	body {background-color: powderblue;}
+	
+	
+	nav {
+	  display:inline-block;
+	  background-color: gray; 
+	  
+	  overflow: hidden;
+	  margin:0;
+	  padding:0;
+	  height: 50px;
+	  
+	}
+	
+
+	
+	nav a {
+	  //display:none;
+	  color:white;
+	  overflow:hidden;
+	  position:relative;
+	  top:-20px;
+	  text-decoration: none;
+	  //padding: 15px;
+	  font-size:0;
+	  white-space: nowrap;
+	  width:0;
+	  -webkit-transition: all 2s; /* Safari */
+      transition: all 2s;
+	}
+	
+	nav img {
+	  display:inline;
+	  width:50px;
+	  height:50px;
+	
+	}
+	
+	nav a:hover{
+	background-color:blue;
+	}
+	
+	
+	.menuD:hover  .menuI  {
+		font-size:16px;
+	    //display:inline-block;
+		padding: 15px;
+		max-width: auto;
+	}
+
+	iframe {
+		width: 98vw;
+		height: 100vh;
+		border:none;
+	}
+	
+	/*
+	nav ul {
+	  display:inline-block;
+	  list-style-type: none;
+	  margin:0;
+	  padding:0;
+	  overflow: hidden;
+	}
+	nav li {
+	  display:inline-block;
+	  padding: 15px;
+	}
+	
+	nav li:hover{
+	background-color:blue;
+	}
+	
+	.menuI {
+	
+	display:none;
+	//padding:0px;
+	//background-color:red;
+	//width:0px;
+	//display:inline-block;
+	
+	}
+	
+	*/
+	
+	
+	
+	
+	
+	
+	
+</style>
+   </head>
+   <body>
+      <nav class="menuD">
+	    <img  src="icon.png"/>
+	    
+		  <a class="menuI" target="myIframe" href="https://zarlanga.github.io/yinyang/public_html/" >Yin-Yang</a>
+		  <a class="menuI" target="myIframe" href="https://zarlanga.github.io/i-ching/public_html/" >I-Ching</a>
+		  <a class="menuI" target="myIframe" href="https://zarlanga.github.io/Meditator/public_html/medi.html" >Meditator</a>
+		  <a class="menuI" target="myIframe" href="https://zarlanga.github.io/GraficadorHTML/public_html/" >Graficador</a>
+		  
+		  
+		  <!--
+		  <li>meditator</li>
+		  <li>meditator</li>
+		  <li>meditator</li>
+		  <li>meditator</li>
+		  <li>meditator</li>
+		  <li>meditator</li>
+		  <li>meditator</li>
+		  <li>meditator</li>
+		  <li>meditator</li>
+		  <li>meditator</li>
+		  <li>meditator</li>
+		  -->
+      </nav>
+
+      <br/>
+
+      <iframe src="home.html" name="myIframe">
+
+      
+	  </iframe>
+   </body>
+</html>
