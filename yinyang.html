@@ -4,6 +4,7 @@
         <title>Taiji /// Huizi's toolbox</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="icon.png" type="image/gif" sizes="16x16">
 
         <!-- Global site tag (gtag.js) - Google Analytics 
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-132762032-2"></script>
@@ -16,40 +17,7 @@
             gtag('config', 'UA-132762032-2');
         </script>-->
 
-        <style>
-            #mySidenav {
-                float:right;
-            }
-            #btnclose, #btnopen{
-                opacity:0;
-            }
-            @media screen and (max-width: 800px) {
-                
-                .myCanvas{
-                    width:100%;
-                }
-                #btnclose, #btnopen{
-                    opacity:1;
-                }
-                #mySidenav {
-                    float:none;
-                    height: 100%; /* 100% Full-height */
-                    width: 0; /*  0 width - change this with JavaScript */
-                    position: fixed; /* Stay in place */
-                    z-index: 1; /* Stay on top */
-                    top: 0; /* Stay at the top */
-                    left: 100%;
-                    background-color: silver; /* Black*/
-                    overflow-x: hidden; /* Disable horizontal scroll */
-                    padding-top: 60px; /* Place content 60px from the top */
-                    transition: 1.5s; /* 0.5 second transition effect to slide in the sidenav */
-                    /* opacity:0.8;*/
-                }
-                #btnclose{
-                    opacity:1;
-                }
-            }
-        </style>
+        <link rel="stylesheet" type="text/css" href="styles/style.css">
         <script>
             function openNav() {
                 document.getElementById("mySidenav").style.width = "50%";
@@ -61,19 +29,50 @@
                 document.getElementById("mySidenav").style.left = "100%";
             }
         </script>
+      
+      <style>
+      .headerr h1{
+        text-shadow: 3px 2px 4px goldenrod;
+      }
+        
+      body{
+        background:url(https://cdn.glitch.com/a5770f3f-8039-4fd7-96d4-f99b40d52f79%2Fbg6chiquito.jpg?1558434262379) no-repeat fixed;
+        background-size: 100% 100%;
+      }
+      </style>
 
     </head>
     <body>
+      
+      <div class="headerr">
+       <div class="headcontain">
+       <img src="https://cdn.glitch.com/a5770f3f-8039-4fd7-96d4-f99b40d52f79%2Fmonta%C3%B1alago.jpg?1558420654824"/>
+       <h1>
+         Taiji /// Huizi's toolbox 
+       </h1>  
+       </div>
+     </div>
+     
+      <nav class="menuD">
+	    <!--<img  src="icon.png"/>-->
+	    <img src="https://cdn.glitch.com/a5770f3f-8039-4fd7-96d4-f99b40d52f79%2Fpakua.png">
+		 <a class="menuI" href="index.html" >Home</a>
+        <a class="menuI" href="yinyang.html" >Yin-Yang</a>
+        <a class="menuI" href="i-ching.html" >I-Ching</a>
+        <a class="menuI"  href="meditator.html" >Meditator</a>
+        
+		
+      </nav>
         <div style="position:relative">
             <div id="test" style='float:left'>
-                <h1 style="display:inline-block">TAIJIIII</h1> <img  id="btnopen" src="icon.png" onclick="openNav()" style="width:50px; height:50px; float:right"/>
+                <!--<h1 style="display:inline-block">TAIJIIII</h1>--> <img  id="btnopen" src="https://cdn.glitch.com/a5770f3f-8039-4fd7-96d4-f99b40d52f79%2Ficon.png?1557878923575" onclick="openNav()" style="width:50px; height:50px; float:right"/>
                 <h3><input type="checkbox" onchange="clickCheck4()" >MOVER!!  </h3>
 
                 <canvas id="myCanvas" width="500" height="500"  style="border:1px solid;background-color: gray"></canvas>
             </div>
 
             <div id="mySidenav" >
-                <img id="btnclose" src="icon.png" onclick="closeNav()" style="width:50px; height:50px; float:right">
+                <img id="btnclose" src="https://cdn.glitch.com/a5770f3f-8039-4fd7-96d4-f99b40d52f79%2Ficon.png?1557878923575" onclick="closeNav()" style="width:50px; height:50px; float:right">
 
 
                 Elegir cantidad de niveles<input type="number" name="lvls" id="lvls" oninput="clickNiveles(this.value)" min="0" max="10" step="1" value="4">

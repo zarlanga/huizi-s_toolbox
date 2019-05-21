@@ -2,20 +2,64 @@
 <html>
 
     <head>
-        <title>MEDITATOR</title>
+        <title>Meditator /// Huizi's toolbox</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" type="text/css" href="styles/style.css">
+      <link rel="icon" href="icon.png" type="image/gif" sizes="16x16">
+      <style>
+        .headerr h1{
+          text-shadow: 3px 2px 4px darkorchid;
+        }
+        body{
+          background:url(https://cdn.glitch.com/a5770f3f-8039-4fd7-96d4-f99b40d52f79%2Fbg8medi.jpg?1558434658216) no-repeat fixed;
+          background-size: 100% 100%;
+        }
+        
+        .testooo{
+          background: rgba(220, 210, 220, 0.4);
+          display: inline-block;
+        }
+        
+        
+      </style>
     </head>
     <body onkeydown="inhalacion(event)" onkeyup="exhalacion()" >
-
-        <h1 style="text-align: center; color: darkmagenta; font-size: 40px" >Meditator</h1>
+      
+      <div class="headerr">
+       <div class="headcontain">
+       <img src="https://cdn.glitch.com/a5770f3f-8039-4fd7-96d4-f99b40d52f79%2Fmedi.jpg?1558431136138"/>
+       <h1>
+         Meditator /// Huizi's toolbox 
+       </h1>  
+       </div>
+     </div>
+<nav class="menuD">
+	    <!--<img  src="icon.png"/>-->
+	    <img src="https://cdn.glitch.com/a5770f3f-8039-4fd7-96d4-f99b40d52f79%2Fpakua.png">
+		  <!--<a class="menuI" target="myIframe" href="https://zarlanga.github.io/yinyang/public_html/" >Yin-Yang</a>
+      <a class="menuI" target="myIframe" href="https://zarlanga.github.io/i-ching/public_html/" >I-Ching</a>
+		  <a class="menuI" target="myIframe" href="https://zarlanga.github.io/Meditator/public_html/medi.html" >Meditator</a>
+		  <a class="menuI" target="myIframe" href="https://zarlanga.github.io/GraficadorHTML/public_html/" >Graficador</a>-->
+     <a class="menuI"  href="index.html" >Home</a>
+        <a class="menuI"  href="yinyang.html" >Yin-Yang</a>
+        <a class="menuI"  href="i-ching.html" >I-Ching</a>
+        <a class="menuI"  href="meditator.html" >Meditator</a>
+        
+		
+      </nav>
+      <br>
         <canvas id="myCanvas" width="400" height="400"  style="border:1px solid;background-color: coral; float:left; margin:0px 20px"></canvas>
 
-
+        <div class="testooo">
+          
+      
         <p> presione cualquier tecla al inhalar y sueltela al exhalar, cuando termine haga click en calcular </p>
         <button onclick="calcular()" >calcular</button>
         <p id="resultado"></p>
+          </div>
         <script type="text/javascript">
+          
             /* features
              * ver que limite minimo y maximo poner para la IN/EX
              * -graficar la duracion de la respiracion? respiracion mas larga y mas corta?

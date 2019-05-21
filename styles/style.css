@@ -1,0 +1,190 @@
+*{
+	box-sizing: border-box;
+	}
+	
+	body {
+    background-color: silver;
+}
+	/**********************************/
+  .headerr img{
+       width:100%;
+       height: 250px;
+       max-width:650px;
+     }
+     
+     .headerr h1{
+       
+      /* color:olivedrab;*/
+       position:absolute;
+       left:20px;
+       bottom:0px;
+       
+       font-size:40px;
+       color: transparent;
+       text-shadow: 3px 2px 4px darkblue;
+     }
+     
+     .headcontain{
+       display:inline-block;
+       position:relative;
+       /*background-color:white;*/
+       top:0;
+       margin:auto;
+     }
+     
+     .headerr{
+       width:100%;
+       text-align:center;
+       /*overflow:hidden;*/
+     }
+
+/**********************/
+	
+	nav {
+	  display:inline-block;
+	  background-color: gray; 
+	  
+	  overflow: hidden;
+	  margin:0;
+	  padding:0;
+	  height: 50px;
+	  
+	}
+	
+
+	
+	nav a {
+	  //display:none;
+	  color:white;
+	  overflow:hidden;
+	  position:relative;
+	  top:-20px;
+	  text-decoration: none;
+	  //padding: 15px;
+	  font-size:0;
+	  white-space: nowrap;
+	  width:0;
+	  -webkit-transition: all 2s; /* Safari */
+      transition: all 2s;
+	}
+	
+	nav img {
+	  display:inline;
+	  width:50px;
+	  height:50px;
+	
+	}
+	
+	nav a:hover{
+	background-color:blue;
+	}
+	
+	
+	.menuD:hover  .menuI  {
+		font-size:16px;
+	    //display:inline-block;
+		padding: 15px;
+		max-width: auto;
+	}
+
+	
+    
+@media screen and (max-width: 800px) {
+  
+  
+  nav{height:auto;}/*bleh*/
+  
+  .menuD:hover .menuI { /*como que esto no estaria haciendo ni mierda*/
+    color: black;
+  width: 100vw;
+    overflow:visible;
+  }
+}
+
+
+.article {
+  margin:25px;
+  text-align:center;
+}
+
+.article img{
+  margin:25px;
+}
+
+
+
+	/*
+	nav ul {
+	  display:inline-block;
+	  list-style-type: none;
+	  margin:0;
+	  padding:0;
+	  overflow: hidden;
+	}
+	nav li {
+	  display:inline-block;
+	  padding: 15px;
+	}
+	
+	nav li:hover{
+	background-color:blue;
+	}
+	
+	.menuI {
+	
+	display:none;
+	//padding:0px;
+	//background-color:red;
+	//width:0px;
+	//display:inline-block;
+	
+	}
+	
+	*/
+
+/* yin yang */
+
+	         #mySidenav {
+              float:right;
+             background: rgba(130, 130, 150, 0.4);
+             
+            }
+            #btnclose, #btnopen{
+                opacity:0;
+            }
+          
+          @media screen and (max-width: 800px) {
+                
+                #myCanvas{
+                    width:100%;
+                }
+                #btnclose, #btnopen{
+                    opacity:1;
+                }
+                #mySidenav {
+                    background:url(https://cdn.glitch.com/a5770f3f-8039-4fd7-96d4-f99b40d52f79%2Fbufa.jpg?1558419402601) no-repeat ;
+                    background-size:cover;
+                    float:none;
+                    height: 100%; /* 100% Full-height */
+                    width: 0; /*  0 width - change this with JavaScript */
+                    position: fixed; /* Stay in place */
+                    z-index: 1; /* Stay on top */
+                    top: 0; /* Stay at the top */
+                    left: 100%;
+                    background-color: silver; /* Black*/
+                    overflow-x: hidden; /* Disable horizontal scroll */
+                    padding-top: 60px; /* Place content 60px from the top */
+                    transition: 1.5s; /* 0.5 second transition effect to slide in the sidenav */
+                    /* opacity:0.8;*/
+                }
+                #btnclose{
+                    opacity:1;
+                }
+              
+              
+              
+            }
+	
+	
+	
+	

@@ -1,0 +1,73 @@
+  *{
+      /*margin:0px;
+      padding:0px;*/
+  }
+
+.contaaa {
+position:relative;
+}
+  button{
+      background-color: DarkSlateGray;
+      color:white;
+      width:200px; 
+      height:70px;
+      margin:0px
+  }
+  button:hover {
+      background-color: black;
+      color:gold;
+  }
+
+  .contaTesto {
+    background: rgba(190, 190, 190, 0.65);
+    /*background:url(https://cdn.glitch.com/a5770f3f-8039-4fd7-96d4-f99b40d52f79%2Ftortu.jpg?1558419932585) no-repeat;*/
+  float:right; 
+  width:50% ;   
+ opacity:0;
+ -webkit-transition: opacity 5s; /* Safari */
+ transition: opacity 5s;
+  }
+
+.testos {
+  width:95%;
+  text-align:center;
+}
+
+.headerr h1{
+  
+  text-shadow: 3px 2px 4px firebrick;
+}
+
+#cnv {
+background-color:black;
+}
+
+  #cnv1 {
+      background-color:black; 
+      float:left;
+      display:none;
+  }
+  @media screen and (max-width: 800px) {
+      button {
+          width:49.5%;
+      }
+      .contaTesto {
+         position:absolute;
+         top:0;
+         left:0;
+         float:none;
+         width:100%;
+
+         z-index:1;
+         color:black;
+         background-color:gold;
+
+
+      }
+      #cnv1{
+          display:inline-block;
+      }
+      #cnv {
+          width:100%;
+      }
+  }

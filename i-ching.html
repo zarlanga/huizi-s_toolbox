@@ -4,7 +4,9 @@
         <title>I-Ching /// Huizi's toolbox</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+      <link rel="stylesheet" type="text/css" href="styles/style.css">
+      <link rel="stylesheet" type="text/css" href="styles/styching.css">
+      <link rel="icon" href="icon.png" type="image/gif" sizes="16x16">
 
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <!--<script async src="https://www.googletagmanager.com/gtag/js?id=UA-132762032-1"></script>
@@ -35,76 +37,51 @@
             //***************************************
         </script>
         <style>
-            *{
-                margin:0px;
-                padding:0px;
-            }
-            button{
-                background-color: DarkSlateGray;
-                color:white;
-                width:200px; 
-                height:70px;
-                margin:0px
-            }
-            button:hover {
-                background-color: black;
-                color:gold;
-            }
-            
-            .contaTesto {
-            float:right; 
-            width:50% ;   
-               opacity:0;
-               -webkit-transition: opacity 5s; /* Safari */
-                transition: opacity 5s;
-            }
-            
-            #cnv1 {
-                display:none;
-            }
-            @media screen and (max-width: 800px) {
-                button {
-                    width:49.5%;
-                }
-                .contaTesto {
-                   position:absolute;
-                   top:0;
-                   left:0;
-                   float:none;
-                   width:100%;
-                   
-                   z-index:1;
-                   color:black;
-                   background-color:gold;
-                  
-                   
-                }
-                #cnv1{
-                    display:inline-block;
-                }
-                #cnv {
-                    width:100%;
-                }
-            }
-            
-        </style>
+      body{
+        background:url(https://cdn.glitch.com/a5770f3f-8039-4fd7-96d4-f99b40d52f79%2Fbg3chiquito.jpg?1558434539374) no-repeat fixed;
+        background-size: 100% 100%;
+      }
+      </style>
     </head>
-    <body style="background-color: silver">
-
-
+    <body >
+     
+<div class="headerr">
+       <div class="headcontain">
+       <img src="https://cdn.glitch.com/a5770f3f-8039-4fd7-96d4-f99b40d52f79%2F8immortals.jpg?1558424184827"/>
+       <h1>
+         I-Ching /// Huizi's toolbox
+       </h1>  
+       </div>
+     </div> 
+     
+<nav class="menuD">
+	    <!--<img  src="icon.png"/>-->
+	    <img src="https://cdn.glitch.com/a5770f3f-8039-4fd7-96d4-f99b40d52f79%2Fpakua.png">
+		  <!--<a class="menuI" target="myIframe" href="https://zarlanga.github.io/yinyang/public_html/" >Yin-Yang</a>
+      <a class="menuI" target="myIframe" href="https://zarlanga.github.io/i-ching/public_html/" >I-Ching</a>
+		  <a class="menuI" target="myIframe" href="https://zarlanga.github.io/Meditator/public_html/medi.html" >Meditator</a>
+		  <a class="menuI" target="myIframe" href="https://zarlanga.github.io/GraficadorHTML/public_html/" >Graficador</a>-->
+     <a class="menuI"  href="index.html" >Home</a>
+        <a class="menuI"  href="yinyang.html" >Yin-Yang</a>
+        <a class="menuI"  href="i-ching.html" >I-Ching</a>
+        <a class="menuI"  href="meditator.html" >Meditator</a>
+        
+		
+      </nav>
+      <br>
 
         <button class="tirador" >Tirar monedas.</button><button class="reseteador" disabled="disabled">Resetear</button><br>
-        <div class="contaaa" style="position:relative">
-            <canvas id="cnv" width="400" height="400" style="background-color:black;" ></canvas>
+        <div class="contaaa" >
+            <canvas id="cnv" width="400" height="400"  ></canvas>
             <div class="contaTesto" >
-                <div id="testo" style="width:90%; text-align:Center">
-                    <canvas id="cnv1" width="100" height="100" style="background-color:black; float:left;" ></canvas></div>
-                <div id="testo1" style="width:90%; text-align:Center"></div>
-                <div id="testo2" style="width:90%; text-align:Center"></div>
-                <div id="testo3" style="width:90%; text-align:Center"></div>
-                <div id="testo4" style="width:90%; text-align:Center"></div>
-                <div id="testo5" style="width:90%; text-align:Center"></div>
-                <div id="testo6" style="width:90%; text-align:Center"></div>
+                <div id="testo" class="testos">
+                    <canvas id="cnv1" width="100" height="100"  ></canvas></div>
+                <div id="testo1" class="testos"></div>
+                <div id="testo2" class="testos"></div>
+                <div id="testo3" class="testos"></div>
+                <div id="testo4" class="testos"></div>
+                <div id="testo5" class="testos"></div>
+                <div id="testo6" class="testos"></div>
             </div>
         </div>
         <div class="monedas"> <span class="m0"></span><span class="m1"></span><span class="m2"></span></div>
