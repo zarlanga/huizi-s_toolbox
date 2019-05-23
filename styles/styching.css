@@ -19,7 +19,10 @@ position:relative;
   }
 
   .contaTesto {
-    background: rgba(190, 190, 190, 0.65);
+     /*font-weight: bold;*/
+    font-size:18px;
+   /* text-shadow: 4px 3px 3px white;*/
+    background: rgba(190, 190, 190, 0.9);
     /*background:url(https://cdn.glitch.com/a5770f3f-8039-4fd7-96d4-f99b40d52f79%2Ftortu.jpg?1558419932585) no-repeat;*/
   float:right; 
   width:50% ;   
