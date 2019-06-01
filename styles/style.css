@@ -35,6 +35,10 @@ button{
        color: transparent;
        text-shadow: 3px 2px 4px darkblue;
      }
+
+      .headerr h3 {
+        color: DarkSlateGray;  
+      }
      
      .headcontain{
        display:inline-block;
@@ -178,9 +182,19 @@ button{
 	  width:80px;
 	  height:80px;
     margin:15px;
-    
+    position:relative;
+    left:20px;
 	
 	}
+
+.borger{
+  height:20px;
+  width:20px;
+  position:relative;
+  left:-60px;
+  top:-30px;
+  animation: lateeeh 7s linear 0.5s infinite;
+}
 	
 	nav a:hover{
 	/*background-color:REBECCAPURPLE;*/
@@ -199,6 +213,11 @@ button{
     
 @media screen and (max-width: 800px) {
   
+  .textcont{
+    font-size:12px;
+  }
+  
+  
   .headerr img{
     height: 150px;
   }
@@ -208,6 +227,7 @@ button{
   display:inline-block;
     background-color:transparent;
     width:100%;
+    /*font-size:0.8em;*/
   }
   
   
@@ -218,7 +238,7 @@ button{
   }
   
   .menuD:hover .menuI { /*como que esto no estaria haciendo ni mierda*/
-    font-size:16px;
+    font-size:14px;
   display:block;
     width:100%;  
     overflow:visible;
@@ -309,6 +329,7 @@ button{
                     overflow-x: hidden; /* Disable horizontal scroll */
                     padding-top: 60px; /* Place content 60px from the top */
                     transition: 1.5s; /* 0.5 second transition effect to slide in the sidenav */
+                  font-size:0.8em;
                     /* opacity:0.8;*/
                 }
                 #btnclose{
