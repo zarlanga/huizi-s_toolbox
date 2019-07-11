@@ -23,18 +23,85 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script>
             $(document).ready(function () {
+                $("#displaynum").text(indLS +1);
+                if (indLS<=1) $('.antIC').prop('disabled', true);
                 $(".tirador").click(function () {
                     tira.tirar();
                     tira.tirar();
                     tira.tirar();
                     tira.tirar();
                     //alert("culo");
+                  indLS = tira.getLS().length -1
+                   $("#displaynum").text(indLS +1);
+                  validarBotones(tira.getLS());
                 });
                 $(".reseteador").click(function () {
                     tira.resetear();
                     //alert("culo");
                 });
+              
+              
+                $(".antIC").click(function(){
+                  tira.resetear();
+                  indLS--;
+                  
+                  $("#displaynum").text(indLS +1);
+                  
+                  let cajon = tira.getLS();
+                  
+                  for (let i =0; i< 6; i++) {
+                     tira.mostrarLineas(cajon[indLS][i], false);
+                 }
+                  
+                  validarBotones(cajon);
+                 // if (indLS<1) $('.antIC').prop('disabled', true);
+                 // if (indLS < cajon.length - 1) $('.sigIC').prop('disabled', false);
+                  
+                  
+                });
+                
+                $(".sigIC").click(function(){
+                     tira.resetear();
+                  indLS++;
+                  
+                  $("#displaynum").text(indLS +1);
+                  
+                  
+                  let cajon = tira.getLS();
+                  
+                  for (let i =0; i< 6; i++) {
+                     tira.mostrarLineas(cajon[indLS][i], false);
+                 }
+                  
+                  validarBotones(cajon);
+                 // if (indLS<1) $('.antIC').prop('disabled', true);
+                 // if (indLS >= cajon.length - 1) $('.sigIC').prop('disabled',true);
+                  
+                  
+                  
+                });
+                
+              function validarBotones(arr){
+                
+                if (indLS < 1) {
+                  $('.antIC').prop('disabled', true);
+                } else {
+                  $('.antIC').prop('disabled', false);
+                }
+                
+                if(indLS >= arr.length -1) {
+                  $('.sigIC').prop('disabled',true);
+                } else {
+                  $('.sigIC').prop('disabled',false);
+                }
+                
+                
+              }
+              
+              
+              
             });
+            
             //***************************************
         </script>
         <style>
@@ -78,8 +145,13 @@
       <br>
 
         <button class="tirador" >Tirar monedas.</button><button class="reseteador" disabled="disabled">Resetear</button><br>
+        <div class="contbot">
+            <button class="antIC" >Anterior</button><button id="displaynum">sasa</button><button class="sigIC" disabled="true">Siguiente</button><br>  
+          </div>
         <div class="contaaa" >
             <canvas id="cnv" width="400" height="400"  ></canvas>
+          
+          
             <div class="contaTesto" >
                 <div id="testo" class="testos">
                     <canvas id="cnv1" width="100" height="100"  ></canvas></div>
@@ -119,6 +191,7 @@
              str += "}";
              
              $(".monedas").prepend(str); */
+            
             const hexagramas = [[1, 34, 5, 26, 11, 9, 14, 43],
                 [25, 51, 3, 27, 24, 42, 21, 17],
                 [6, 40, 29, 4, 7, 59, 64, 47],
@@ -183,10 +256,11 @@
                     this.tLineas = [];
                     this.tMutantes = [];
                     this.borrarPantalla();
-                    $("#testo").text("");
+                     $("#testo").html("<canvas id=\"cnv1\" width=\"100\" height=\"100\"  ></canvas>");
                     for (var i = 1; i <= 6; i++) {
                         $("#testo" + i).text("");
                     }
+                  $(".contaTesto").css("opacity","0");
                 }
                 traerTexto(hex, mut) {
                     //alert("hex" + hex + "mut" + mut);
@@ -245,12 +319,15 @@
                          ctx1.drawImage(c, 0, 0,100,100);
                     
                 }
-                mostrarLineas(ac) {
+                mostrarLineas(ac, boo) {
                     this.tLineas[this.tLineas.length] = ac;
                     this.tMutantes[this.tMutantes.length] = ac == 6 || ac == 9;
                     this.dibujarLinea(this.tLineas.length, ac);
                     if (this.tLineas.length == 6) {
                         this.definirHexagrama();
+                        if(boo)  this.guardarLS(this.tLineas);
+                        
+                        
                     }
                 }
                 calcularLineas(arr) {
@@ -263,7 +340,7 @@
                         }
                     }
                     //alert(acumulador);
-                    this.mostrarLineas(acumulador);
+                    this.mostrarLineas(acumulador, true);
                 }
                 tirar() {
                     if (this.tMonedas.length < 3) {
@@ -278,8 +355,29 @@
                 tirarMoneda() {
                     return Math.floor(Math.random() * 2);
                 }
+              
+              /*****localstorage***/
+              guardarLS(arr){
+                  if (localStorage.getItem("arrayIC") == null) {
+			              localStorage.setItem("arrayIC","[]");
+		              }
+                  let cajon = JSON.parse(localStorage.getItem("arrayIC"));
+                  cajon.push(arr);
+                  localStorage.setItem("arrayIC", JSON.stringify(cajon) );
+                }
+              
+              getLS() {
+                if (localStorage.getItem("arrayIC") != null) {
+                  let cajon = JSON.parse(localStorage.getItem("arrayIC"));
+                  return cajon;
+                } else{
+                  return [];
+                  }
+              }
+              
             }
             var tira = new Tirada();
+            var indLS= tira.getLS().length-1;
             //***************************************************************
             /*
              
