@@ -11,6 +11,7 @@
       <meta name="keywords" content="taoism,i-ching,i ching, iching, meditation, buddhism, buddism, mindfulness">
       <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-140717947-1"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -34,8 +35,90 @@
           display: inline-block;
         }
         
+        button{
+      background-color: indianred;
+      color:white;
+      width:200px; 
+      height:70px;
+      margin:0px
+      }
+      button:hover {
+          background-color: black;
+          color:gold;
+      }
+      .contbot button {
+      width:150px;
+        height:30px;
+        
+      }
+
+    .contbot #displaynumME {
+      width:100px;
+
+      background-color:coral;
+    }
+
+    button:disabled{
+      color:gray;
+    }
+        .contbot{
+          margin: 0px 5px;
+        }
+        
+    @media screen and (max-width: 800px) {
+    .contbot button {
+      width:40%;
+      height:30px;
+     }
+  
+      .contbot #displaynumME {
+       width:19%;
+        background-color:orange;
+      }
+    }
+        
         
       </style>
+      <script>
+      $(document).ready(function () {
+          $("#displaynumME").text(indLS +1);
+          if (indLS<=1) $('.antME').prop('disabled', true);
+
+        alert(indLS);
+
+          $(".antME").click(function(){
+            //alert("culo");
+            indLS--;
+
+            $("#displaynumME").text(indLS +1);
+
+            let cajon = getLS();
+
+            calcularLS(cajon[indLS][0],cajon[indLS][1] )
+
+            validarBotones(cajon);
+
+          });
+
+          $(".sigME").click(function(){
+
+            indLS++;
+
+            $("#displaynumME").text(indLS +1);
+
+
+            let cajon = getLS();
+            
+            calcularLS(cajon[indLS][0],cajon[indLS][1] )
+
+
+            validarBotones(cajon);
+
+          });
+
+      
+      });
+      </script>
     </head>
     <body onkeydown="inhalacion(event)" onkeyup="exhalacion()" >
       
@@ -69,10 +152,11 @@
       </div>
       <br>
       <div ontouchstart="inhalacion(event)" ontouchend="exhalacion()">
-        
-      
+        <div class="contbot"  >
+          <button class="antME" >Anterior</button><button id="displaynumME">sasa</button><button class="sigME" disabled="true">Siguiente</button><br>  
+        </div>
         <canvas id="myCanvas" width="400" height="400"  style="border:1px solid;background-color: coral; float:left; margin:5px "></canvas>
-    </div>
+      </div>
         <div class="testooo">
           
       
@@ -107,6 +191,7 @@
              alert(i +" //  "+  (Date.now() - t0) );  (en calcular)
              
              */
+            var indLS = getLS().length -1;
             var tiemposIN = [];
             var tiemposEX = [];
             var dale = true;
@@ -200,7 +285,13 @@
                     dataTest += tx / 1000 + "segundos////" + rpm[p].toFixed(2) + "rpm  <br>";
                 }
                 graficarArray(rpm, 0);
-                //graficarArray(tr, 1);
+                
+              guardarLS(tiemposIN, tiemposEX);
+              indLS = getLS().length -1
+              $("#displaynumME").text(indLS +1);
+              validarBotones(getLS());
+              
+              //graficarArray(tr, 1);
                 //graficarArray(proporcionINEX, 0);
                 tTotal = calcularHMS(tiemposIN[tiemposIN.length - 1] - tiemposIN[0]); //parametro es la diferencia de tiempo en milisegundos desde el inicio hasta el calcular
                 testo += "<br>Respiraciones por minuto promedio: " + (rpmAC / (tiemposIN.length - 1)).toFixed(2) + "<br>";
@@ -257,6 +348,94 @@
                     document.getElementById("resultado").innerHTML = testo;
                 }
             }
+          
+          function calcularLS(arrIN, arrEX) {
+                //dale=false;
+                var testo = "";
+                var rpm = []; //array para guardar las respiraciones por minuto (eventualmente sacar promedios parciales?)
+                var rpmAC = 0; // acumulador para calcular el promedio
+                var tr = []; // array para duracion de respiraciones
+                var tInAc = 0; //acumulador tiempo de inhalacion
+                var tExAc = 0; // acumulador tiempo exhalacion
+                var tTotal; // array con cantidad de horas en pos [0], min en [1], seg en [2]
+                var proporcionINEX = [];
+                dataTest = "";
+                limpiarGrafico();
+                for (var p = 0; p < arrIN.length - 1; p++) {
+                    tx = (arrIN[p + 1] - arrIN[p]);
+                    tIn = arrEX[p] - arrIN[p];
+                    tEx = arrIN[p + 1] - arrEX[p];
+                    tInAc += tIn;
+                    tExAc += tEx;
+                    proporcionINEX[proporcionINEX.length] = tIn / (tIn + tEx);
+                    tr[tr.length] = tx;
+                    rpm[rpm.length] = 60000 / tx;
+                    //rpm[rpm.length] = (60000 / tx).toFixed(2);
+                    rpmAC += rpm[p];
+                    dataTest += tIn + "IN///" + tEx + "EX||||||||";
+                    dataTest += tx / 1000 + "segundos////" + rpm[p].toFixed(2) + "rpm  <br>";
+                }
+                graficarArray(rpm, 0);
+                
+              
+              
+              //graficarArray(tr, 1);
+                //graficarArray(proporcionINEX, 0);
+                tTotal = calcularHMS(arrIN[arrIN.length - 1] - arrIN[0]); //parametro es la diferencia de tiempo en milisegundos desde el inicio hasta el calcular
+                testo += "<br>Respiraciones por minuto promedio: " + (rpmAC / (arrIN.length - 1)).toFixed(2) + "<br>";
+                testo += "<br> Pico maximo: " + (Math.max.apply(null, rpm)).toFixed(2) + "rpm<br>";
+                testo += "<br> Pico minimo: " + (Math.min.apply(null, rpm)).toFixed(2) + "rpm<br>";
+                testo += "<br> Amplitud: " + (Math.max.apply(null, tr) - Math.min.apply(null, tr)) + "milisegundos <br>";
+                testo += "<br> Proporcion In/Ex: " + Math.floor((tInAc / (tExAc + tInAc)) * 100) + "% in/" + Math.floor((tExAc / (tExAc + tInAc)) * 100) + "% ex<br>";
+                //testo += "<br> Proporcion In/Ex: " +( (tInAc > tExAc) ? (tInAc/tExAc).toFixed(2) +  " Inhalacion<br>" : (tExAc/tInAc).toFixed(2) + "Exhalacion<br>" );
+                testo += "<br>Total respiraciones: " + (arrIN.length - 1) + "<br>";
+                testo += "<br>Tiempo total: " + tTotal[0] + " horas, " + tTotal[1] + " min,  " + tTotal[2] + "seg<br>";
+                //testo += calcularTTotal();
+                document.getElementById("resultado").innerHTML = testo;
+                document.getElementById("resultado").innerHTML += "<br>" + dataTest;
+                arrIN = [];
+                arrEX = [];
+            }
+          
+          
+         function guardarLS(arrIN, arrEX){
+              if (localStorage.getItem("arrayME") == null) {
+                localStorage.setItem("arrayME","[]");
+              }
+              let cajon = JSON.parse(localStorage.getItem("arrayME"));
+              cajon.push([arrIN, arrEX]);
+              localStorage.setItem("arrayME", JSON.stringify(cajon) );
+            }
+
+         function getLS() {
+            if (localStorage.getItem("arrayME") != null) {
+              let cajon = JSON.parse(localStorage.getItem("arrayME"));
+              return cajon;
+            } else{
+              return [];
+              }
+          }
+          function validarBotones(arr){
+
+            if (indLS < 1) {
+              $('.antME').prop('disabled', true);
+            } else {
+              $('.antME').prop('disabled', false);
+            }
+
+            if(indLS >= arr.length -1) {
+              
+              $('.sigME').prop('disabled',true);
+            } else {
+              
+              $('.sigME').prop('disabled',false);
+            }
+
+
+        }
+          
+          
+          
         </script>
     </body>
 </html>
