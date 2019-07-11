@@ -116,24 +116,7 @@
 
           });
 
-      function validarBotones(arr){
-
-            if (indLS < 1) {
-              $('.antME').prop('disabled', true);
-            } else {
-              $('.antME').prop('disabled', false);
-            }
-
-            if(indLS >= arr.length -1) {
-              
-              $('.sigME').prop('disabled',true);
-            } else {
-              
-              $('.sigME').prop('disabled',false);
-            }
-
-
-        }
+      
       });
       </script>
     </head>
@@ -432,7 +415,24 @@
               return [];
               }
           }
-          
+          function validarBotones(arr){
+
+            if (indLS < 1) {
+              $('.antME').prop('disabled', true);
+            } else {
+              $('.antME').prop('disabled', false);
+            }
+
+            if(indLS >= arr.length -1) {
+              
+              $('.sigME').prop('disabled',true);
+            } else {
+              
+              $('.sigME').prop('disabled',false);
+            }
+
+
+        }
           
           
           
