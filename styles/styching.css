@@ -17,7 +17,20 @@ position:relative;
       background-color: black;
       color:gold;
   }
+  .contbot button {
+  width:150px;
+    height:30px;
+  }
+  
+.contbot #displaynum {
+  width:100px;
+  
+  background-color:orange;
+}
 
+button:disabled{
+  color:gray;
+}
   .contaTesto {
      /*font-weight: bold;*/
     font-size:18px;
@@ -67,6 +80,16 @@ background-color:black;
         text-size:0.7em;
 
 
+      }
+    
+     .contbot button {
+      width:40%;
+        height:30px;
+      }
+  
+      .contbot #displaynum {
+          width:19%;
+        background-color:orange;
       }
       #cnv1{
           display:inline-block;
