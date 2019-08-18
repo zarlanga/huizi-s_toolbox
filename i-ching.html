@@ -1,120 +1,108 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>I-Ching /// Huizi's toolbox</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="keywords" content="taoism,i-ching,i ching, iching, meditation, buddhism, buddism, mindfulness">
-      <link rel="stylesheet" type="text/css" href="styles/style.css">
-      <link rel="stylesheet" type="text/css" href="styles/styching.css">
-      <link rel="icon" href="icon.png" type="image/gif" sizes="16x16">
-<meta name="description" content="A collection of web toys made with a taoist orientation: i-ching, meditation tracker, etc"/>
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-132762032-3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-132762032-3');
-</script>
+<head>
+	<title>I-Ching /// Huizi's toolbox</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="keywords" content="taoism,i-ching,i ching, iching, meditation, buddhism, buddism, mindfulness">
+	<link rel="stylesheet" type="text/css" href="styles/style.css">
+	<link rel="stylesheet" type="text/css" href="styles/styching.css">
+	<link rel="icon" href="icon.png" type="image/gif" sizes="16x16">
+	<meta name="description" content="A collection of web toys made with a taoist orientation: i-ching, meditation tracker, etc"/>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-132762032-3"></script>
+	<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'UA-132762032-3');
+	</script>
 
 
 
 <!----------------->    
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script>
-            $(document).ready(function () {
-                $("#displaynum").text(indLS +1);
-                if (indLS<0) $('.antIC').prop('disabled', true);
-                $(".tirador").click(function () {
-                    tira.tirar();
-                    tira.tirar();
-                    tira.tirar();
-                    tira.tirar();
-                    //alert("culo");
-                  indLS = tira.getLS().length -1
-                   $("#displaynum").text(indLS +1);
-                  validarBotones(tira.getLS());
-                });
-                $(".reseteador").click(function () {
-                    tira.resetear();
-                    //alert("culo");
-                });
-              
-              
-                $(".antIC").click(function(){
-                  tira.resetear();
-                  indLS--;
-                  
-                  $("#displaynum").text(indLS +1);
-                  
-                  let cajon = tira.getLS();
-                  
-                  for (let i =0; i< 6; i++) {
-                     tira.mostrarLineas(cajon[indLS][i], false);
-                 }
-                  
-                  validarBotones(cajon);
-                 // if (indLS<1) $('.antIC').prop('disabled', true);
-                 // if (indLS < cajon.length - 1) $('.sigIC').prop('disabled', false);
-                  
-                  
-                });
-                
-                $(".sigIC").click(function(){
-                     tira.resetear();
-                  indLS++;
-                  
-                  $("#displaynum").text(indLS +1);
-                  
-                  
-                  let cajon = tira.getLS();
-                  
-                  for (let i =0; i< 6; i++) {
-                     tira.mostrarLineas(cajon[indLS][i], false);
-                 }
-                  
-                  validarBotones(cajon);
-                 // if (indLS<1) $('.antIC').prop('disabled', true);
-                 // if (indLS >= cajon.length - 1) $('.sigIC').prop('disabled',true);
-                  
-                  
-                  
-                });
-                
-              function validarBotones(arr){
-                
-                if (indLS < 1) {
-                  $('.antIC').prop('disabled', true);
-                } else {
-                  $('.antIC').prop('disabled', false);
-                }
-                
-                if(indLS >= arr.length -1) {
-                  $('.sigIC').prop('disabled',true);
-                } else {
-                  $('.sigIC').prop('disabled',false);
-                }
-                
-                
-              }
-              
-              
-              
-            });
-            
-            //***************************************
-        </script>
-        <style>
-      body{
-        background:url(https://cdn.glitch.com/a5770f3f-8039-4fd7-96d4-f99b40d52f79%2Fbg3chiquito.jpg?1558434539374) no-repeat fixed;
-        background-size: cover;
-        background-position: center center;
-      }
-      </style>
-    </head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			//$("#displaynum").text(indLS + " guardados" );
+			//if (indLS<2) $('.antIC').prop('disabled', true);
+			
+			$(".tirador").click(function () {
+				tira.tirar();
+				tira.tirar();
+				tira.tirar();
+				tira.tirar();
+				//alert("culo");
+			  indLS = tira.getLS().length ;
+			//   $("#displaynum").text(indLS+1 + " guardados" );
+			  validarBotones(tira.getLS());
+			});
+			
+			
+			$(".reseteador").click(function () {
+				var arrmut = tira.tLineas;
+				tira.resetear();
+				
+				if(!tira.mutado) {
+				tira.mutar(arrmut);
+				tira.mutado= true;
+				console.log("muto");
+				$(".reseteador").text("Resetear");
+				$('.antIC').prop('disabled', true);
+				$('.sigIC').prop('disabled', true);
+				} else{
+					$(".reseteador").text("Mutar");
+					tira.mutado= false;	
+					indLS= tira.getLS().length;
+					validarBotones(tira.getLS());
+				}
+				//alert("culo");
+			});
+		  
+		  
+			$(".antIC").click(function(){
+			  tira.resetear();
+			  indLS--;
+			  
+			 // $("#displaynum").text(indLS );
+			  
+			  let cajon = tira.getLS();
+			  
+			  for (let i =0; i< 6; i++) {
+				 tira.mostrarLineas(cajon[indLS][i], false);
+			 }
+			  
+			  validarBotones(cajon);
+			 // if (indLS<1) $('.antIC').prop('disabled', true);
+			 // if (indLS < cajon.length - 1) $('.sigIC').prop('disabled', false);
+			  
+			  
+			});
+			
+			$(".sigIC").click(function(){
+				tira.resetear();
+				indLS++;
+				let cajon = tira.getLS();
+
+				for (let i =0; i< 6; i++) {
+					tira.mostrarLineas(cajon[indLS][i], false);
+				}
+				validarBotones(cajon);
+			 });
+			
+		});
+		
+		//***************************************
+	</script>
+	<style>
+		body{
+			background:url(https://cdn.glitch.com/a5770f3f-8039-4fd7-96d4-f99b40d52f79%2Fbg3chiquito.jpg?1558434539374) no-repeat fixed;
+			background-size: cover;
+			background-position: center center;
+		}
+	</style>
+</head>
     <body >
      
 <div class="headerr">
@@ -147,7 +135,7 @@
       </div>
       <br>
 
-        <button class="tirador" >Tirar monedas.</button><button class="reseteador" disabled="disabled">Resetear</button><br>
+        <button class="tirador" >Tirar monedas.</button><button class="reseteador" disabled="disabled">Mutar</button><br>
         <div class="contbot">
             <button class="antIC" >Anterior</button><button id="displaynum">sasa</button><button class="sigIC" disabled="true">Siguiente</button><br>  
           </div>
@@ -179,208 +167,240 @@
 
       
       
-        <script>
-            //var mutantes=[];
-            //var lineas=[];
-            //var monedas=[];
-            //var contador=1;
-            //alert("culo");
-            /*
-             var str =" switch (he) { <br>";
-             for (let i=1; i<=64;i++) {
-             //str += "case " + i + ": \n \n break: \n \n";
-             str += "case " + i + ": <br>return <br> break: <br><br>";
-             }
-             str += "}";
-             
-             $(".monedas").prepend(str); */
-            
-            const hexagramas = [[1, 34, 5, 26, 11, 9, 14, 43],
-                [25, 51, 3, 27, 24, 42, 21, 17],
-                [6, 40, 29, 4, 7, 59, 64, 47],
-                [33, 62, 39, 52, 15, 53, 56, 31],
-                [12, 16, 8, 23, 2, 20, 35, 45],
-                [44, 32, 48, 18, 46, 57, 50, 28],
-                [13, 55, 63, 22, 36, 37, 30, 49],
-                [10, 54, 60, 41, 19, 61, 38, 58]];
-            class Tirada {
-                constructor() {
-                    this.tTrigramas = [];
-                    this.tMutantes = [];
-                    this.tLineas = [];
-                    //var _nroLinea;
-                    this.tMonedas = [];
-                }
-                dibujarLinea(i, mo) {
-                    var c = document.getElementById("cnv");
-                    var ctx = c.getContext("2d");
-                    var yL = (c.getAttribute("height") / 7) * (7 - i);
-                    var xI = c.getAttribute("width") / 8;
-                    var xF = xI * 7;
-                    ctx.beginPath();
-                    ctx.lineWidth = 7;
-                    ctx.strokeStyle = "gold";
-                    ctx.moveTo(xI, yL);
-                    if (mo % 2 != 0) {
-                        ctx.lineTo(xF, yL);
-                    } else {
-                        ctx.lineTo(xI * 3, yL);
-                        ctx.stroke();
-                        ctx.moveTo(xF * (5 / 7), yL);
-                        ctx.lineTo(xF, yL);
-                    }
-                    ctx.stroke();
-                    ctx.beginPath();
-                    ctx.strokeStyle = "coral";
-                    ctx.lineWidth = 5;
-                    if (mo == 9) {
-                        ctx.arc(xI * 4, yL, 25, 0, 2 * Math.PI);
-                        ctx.stroke();
-                    }
-                    if (mo == 6) {
-                        ctx.moveTo(xI * 4 - 25, yL - 25);
-                        ctx.lineTo(xI * 4 + 25, yL + 25);
-                        ctx.moveTo(xI * 4 + 25, yL - 25);
-                        ctx.lineTo(xI * 4 - 25, yL + 25);
-                        ctx.stroke();
-                    }
-                    
-                }
-                borrarPantalla() {
-                    var c = document.getElementById("cnv");
-                    var ctx = c.getContext("2d");
-                    ctx.fillStyle = "black";
-                    ctx.fillRect(0, 0, 400, 400);
-                }
-                //************************************************
-                resetear() {
-                    $(".tirador").attr("disabled", false);
-                    $(".reseteador").attr("disabled", true);
-                    this.tLineas = [];
-                    this.tMutantes = [];
-                    this.borrarPantalla();
-                     $("#testo").html("<canvas id=\"cnv1\" width=\"100\" height=\"100\"  ></canvas>");
-                    for (var i = 1; i <= 6; i++) {
-                        $("#testo" + i).text("");
-                    }
-                  $(".contaTesto").css("opacity","0");
-                }
-                traerTexto(hex, mut) {
-                    //alert("hex" + hex + "mut" + mut);
-                    var rawFile = new XMLHttpRequest();
-                    var tx = "https://zarlanga.github.io/i-ching/public_html/Testos/Hex";
-                    //var tx = "./Testos/hex";
-                    tx += mut !== undefined ? hex + "lin" + mut : "a" + hex;
-                    tx += ".txt";
-                    var muta = mut !== undefined ? mut : "";
-                    rawFile.open("GET", tx, true);
-                    rawFile.onreadystatechange = function () {
-                        if (rawFile.readyState === 4) {
-                            var allText = rawFile.responseText;
-                            //document.getElementById("testo").innerHTML = allText;
-                            $("#testo" + muta).append(allText);
-                            $("#testo" + muta).append("<br/><br/>");
-                        }
-                    };
-                    rawFile.send();
-                }
-                calcularTrigrama(inf) {
-                    let tr = inf ? 3 : 0;
-                    return this.tLineas[0 + tr] % 2 == 0 ?
-                            this.tLineas[1 + tr] % 2 == 0 ?
-                            this.tLineas[2 + tr] % 2 == 0 ? "5" : "4"
-                            : this.tLineas[2 + tr] % 2 == 0 ? "3" : "6"
-                            : this.tLineas[1 + tr] % 2 == 0 ?
-                            this.tLineas[2 + tr] % 2 == 0 ? "2" : "7"
-                            : this.tLineas[2 + tr] % 2 == 0 ? "8" : "1"
-                }
-                definirHexagrama() {
-                    let bandera = false;
-                    $(".tirador").attr("disabled", true);
-                    $(".reseteador").attr("disabled", false);
-                    this.tTrigramas[0] = this.calcularTrigrama(0);
-                    this.tTrigramas[1] = this.calcularTrigrama(1);
-                    this.traerTexto(hexagramas[this.tTrigramas[0] - 1][this.tTrigramas[1] - 1]);
-                    bandera = false;
-                    for (var i = 0; i < this.tMutantes.length; i++) {
-                        //$(".monedas").prepend("<p>" + this.tMutantes[i] + "</p>");
-                        if (this.tMutantes[i]) {
-                            this.traerTexto(hexagramas[this.tTrigramas[0] - 1][this.tTrigramas[1] - 1], i + 1);
-                            bandera = true;
-                        }
-                    }
-                    if (!bandera) {
-                        $("#testo1").append("No hay informacion de lineas");
-                    }
-                    $(".contaTesto").css("opacity","1");
-                    //$(".contaTesto").fadeIn(5000);
-                    
-                    
-                        var c = document.getElementById("cnv");
-                         var c1= document.getElementById("cnv1");
-                         var ctx1=c1.getContext("2d");
-                         ctx1.drawImage(c, 0, 0,100,100);
-                    
-                }
-                mostrarLineas(ac, boo) {
-                    this.tLineas[this.tLineas.length] = ac;
-                    this.tMutantes[this.tMutantes.length] = ac == 6 || ac == 9;
-                    this.dibujarLinea(this.tLineas.length, ac);
-                    if (this.tLineas.length == 6) {
-                        this.definirHexagrama();
-                        if(boo)  this.guardarLS(this.tLineas);
-                        
-                        
-                    }
-                }
-                calcularLineas(arr) {
-                    let acumulador = 0;
-                    for (let i = 0; i < arr.length; i++) {
-                        if (arr[i]) {
-                            acumulador += 3;
-                        } else {
-                            acumulador += 2;
-                        }
-                    }
-                    //alert(acumulador);
-                    this.mostrarLineas(acumulador, true);
-                }
-                tirar() {
-                    if (this.tMonedas.length < 3) {
-                        this.tMonedas[this.tMonedas.length] = this.tirarMoneda();
-                        //$(".m" + (this.tMonedas.length - 1)).text(this.tMonedas[this.tMonedas.length - 1]);
-                    } else {
-                        this.calcularLineas(this.tMonedas);
-                        this.tMonedas = [];
-                        // $(".m0,.m1,.m2").text("");
-                    }
-                }
-                tirarMoneda() {
-                    return Math.floor(Math.random() * 2);
-                }
-              
-              /*****localstorage***/
-              guardarLS(arr){
-                  if (localStorage.getItem("arrayIC") == null) {
-			              localStorage.setItem("arrayIC","[]");
-		              }
-                  let cajon = JSON.parse(localStorage.getItem("arrayIC"));
-                  cajon.push(arr);
-                  localStorage.setItem("arrayIC", JSON.stringify(cajon) );
-                }
-              
-              getLS() {
-                if (localStorage.getItem("arrayIC") != null) {
-                  let cajon = JSON.parse(localStorage.getItem("arrayIC"));
-                  return cajon;
-                } else{
-                  return [];
-                  }
-              }
-              
-            }
-            var tira = new Tirada();
-            var indLS= tira.getLS().length-1;
+	<script>
+	//var mutantes=[];
+	//var lineas=[];
+	//var monedas=[];
+	//var contador=1;
+	//alert("culo");
+	/*
+	 var str =" switch (he) { <br>";
+	 for (let i=1; i<=64;i++) {
+	 //str += "case " + i + ": \n \n break: \n \n";
+	 str += "case " + i + ": <br>return <br> break: <br><br>";
+	 }
+	 str += "}";
+	 
+	 $(".monedas").prepend(str); */
+
+	const hexagramas = [[1, 34, 5, 26, 11, 9, 14, 43],
+		[25, 51, 3, 27, 24, 42, 21, 17],
+		[6, 40, 29, 4, 7, 59, 64, 47],
+		[33, 62, 39, 52, 15, 53, 56, 31],
+		[12, 16, 8, 23, 2, 20, 35, 45],
+		[44, 32, 48, 18, 46, 57, 50, 28],
+		[13, 55, 63, 22, 36, 37, 30, 49],
+		[10, 54, 60, 41, 19, 61, 38, 58]];
+	class Tirada {
+		constructor() {
+			this.tTrigramas = [];
+			this.tMutantes = [];
+			this.tLineas = [];
+			//var _nroLinea;
+			this.tMonedas = [];
+			this.mutado=false;
+		}
+		dibujarLinea(i, mo) {
+			var c = document.getElementById("cnv");
+			var ctx = c.getContext("2d");
+			var yL = (c.getAttribute("height") / 7) * (7 - i);
+			var xI = c.getAttribute("width") / 8;
+			var xF = xI * 7;
+			ctx.beginPath();
+			ctx.lineWidth = 7;
+			ctx.strokeStyle = "gold";
+			ctx.moveTo(xI, yL);
+			if (mo % 2 != 0) {
+				ctx.lineTo(xF, yL);
+			} else {
+				ctx.lineTo(xI * 3, yL);
+				ctx.stroke();
+				ctx.moveTo(xF * (5 / 7), yL);
+				ctx.lineTo(xF, yL);
+			}
+			ctx.stroke();
+			ctx.beginPath();
+			ctx.strokeStyle = "coral";
+			ctx.lineWidth = 5;
+			if (mo == 9) {
+				ctx.arc(xI * 4, yL, 25, 0, 2 * Math.PI);
+				ctx.stroke();
+			}
+			if (mo == 6) {
+				ctx.moveTo(xI * 4 - 25, yL - 25);
+				ctx.lineTo(xI * 4 + 25, yL + 25);
+				ctx.moveTo(xI * 4 + 25, yL - 25);
+				ctx.lineTo(xI * 4 - 25, yL + 25);
+				ctx.stroke();
+			}
+			
+		}
+		borrarPantalla() {
+			var c = document.getElementById("cnv");
+			var ctx = c.getContext("2d");
+			ctx.fillStyle = "black";
+			ctx.fillRect(0, 0, 400, 400);
+		}
+		//************************************************
+		resetear() {
+			$(".tirador").attr("disabled", false);
+			$(".reseteador").attr("disabled", true);
+			this.tLineas = [];
+			this.tMutantes = [];
+			this.borrarPantalla();
+			 $("#testo").html("<canvas id=\"cnv1\" width=\"100\" height=\"100\"  ></canvas>");
+			for (var i = 1; i <= 6; i++) {
+				$("#testo" + i).text("");
+			}
+		  $(".contaTesto").css("opacity","0");
+		}
+		traerTexto(hex, mut) {
+			//alert("hex" + hex + "mut" + mut);
+			var rawFile = new XMLHttpRequest();
+			var tx = "https://zarlanga.github.io/i-ching/public_html/Testos/Hex";
+			//var tx = "./Testos/hex";
+			tx += mut !== undefined ? hex + "lin" + mut : "a" + hex;
+			tx += ".txt";
+			var muta = mut !== undefined ? mut : "";
+			rawFile.open("GET", tx, true);
+			rawFile.onreadystatechange = function () {
+				if (rawFile.readyState === 4) {
+					var allText = rawFile.responseText;
+					//document.getElementById("testo").innerHTML = allText;
+					$("#testo" + muta).append(allText);
+					$("#testo" + muta).append("<br/><br/>");
+				}
+			};
+			rawFile.send();
+		}
+		calcularTrigrama(inf) {
+			let tr = inf ? 3 : 0;
+			return this.tLineas[0 + tr] % 2 == 0 ?
+					this.tLineas[1 + tr] % 2 == 0 ?
+					this.tLineas[2 + tr] % 2 == 0 ? "5" : "4"
+					: this.tLineas[2 + tr] % 2 == 0 ? "3" : "6"
+					: this.tLineas[1 + tr] % 2 == 0 ?
+					this.tLineas[2 + tr] % 2 == 0 ? "2" : "7"
+					: this.tLineas[2 + tr] % 2 == 0 ? "8" : "1"
+		}
+		definirHexagrama() {
+			let bandera = false;
+			$(".tirador").attr("disabled", true);
+			$(".reseteador").attr("disabled", false);
+			this.tTrigramas[0] = this.calcularTrigrama(0);
+			this.tTrigramas[1] = this.calcularTrigrama(1);
+			this.traerTexto(hexagramas[this.tTrigramas[0] - 1][this.tTrigramas[1] - 1]);
+			bandera = false;
+			for (var i = 0; i < this.tMutantes.length; i++) {
+				//$(".monedas").prepend("<p>" + this.tMutantes[i] + "</p>");
+				if (this.tMutantes[i]) {
+					this.traerTexto(hexagramas[this.tTrigramas[0] - 1][this.tTrigramas[1] - 1], i + 1);
+					bandera = true;
+				}
+			}
+			if (!bandera) {
+				$("#testo1").append("No hay informacion de lineas");
+			}
+			$(".contaTesto").css("opacity","1");
+			//$(".contaTesto").fadeIn(5000);
+			
+			
+				var c = document.getElementById("cnv");
+				 var c1= document.getElementById("cnv1");
+				 var ctx1=c1.getContext("2d");
+				 ctx1.drawImage(c, 0, 0,100,100);
+			
+		}
+		mostrarLineas(ac, boo) {
+			this.tLineas[this.tLineas.length] = ac;
+			this.tMutantes[this.tMutantes.length] = ac == 6 || ac == 9;
+			this.dibujarLinea(this.tLineas.length, ac);
+			if (this.tLineas.length == 6) {
+				this.definirHexagrama();
+				if(boo)  this.guardarLS(this.tLineas);
+				
+				
+			}
+		}
+		calcularLineas(arr) {
+			let acumulador = 0;
+			for (let i = 0; i < arr.length; i++) {
+				if (arr[i]) {
+					acumulador += 3;
+				} else {
+					acumulador += 2;
+				}
+			}
+			//alert(acumulador);
+			this.mostrarLineas(acumulador, true);
+		}
+		tirar() {
+			if (this.tMonedas.length < 3) {
+				this.tMonedas[this.tMonedas.length] = this.tirarMoneda();
+				//$(".m" + (this.tMonedas.length - 1)).text(this.tMonedas[this.tMonedas.length - 1]);
+			} else {
+				this.calcularLineas(this.tMonedas);
+				this.tMonedas = [];
+				// $(".m0,.m1,.m2").text("");
+			}
+		}
+		tirarMoneda() {
+			return Math.floor(Math.random() * 2);
+		}
+		
+			
+		mutar(arr){
+			console.log(arr);
+			arr.forEach(m =>{
+				this.mostrarLineas(m==6 ?  7 : m==9 ?   8: m,false);
+			} );
+			this.mutado = true;
+			//console.log(mut);
+			
+		}
+		
+		
+	  
+	  /*****localstorage***/
+		guardarLS(arr){
+		  if (localStorage.getItem("arrayIC") == null) {
+				  localStorage.setItem("arrayIC","[]");
+			  }
+		  let cajon = JSON.parse(localStorage.getItem("arrayIC"));
+		  cajon.push(arr);
+		  localStorage.setItem("arrayIC", JSON.stringify(cajon) );
+		}
+	  
+		getLS() {
+			if (localStorage.getItem("arrayIC") != null) {
+			  let cajon = JSON.parse(localStorage.getItem("arrayIC"));
+			  return cajon;
+			} else{
+			  return [];
+		    }
+	    }
+	  
+	}
+	/*********/
+	function validarBotones(arr){
+		$("#displaynum").text(indLS);
+		if (indLS < 1) {
+		  $('.antIC').prop('disabled', true);
+		} else {
+		  $('.antIC').prop('disabled', false);
+		}
+		
+		if(indLS >= arr.length -1) {
+		  $('.sigIC').prop('disabled',true);
+		} else {
+		  $('.sigIC').prop('disabled',false);
+		}
+		
+		
+	  }
+	var tira = new Tirada();
+	var indLS= tira.getLS().length;
+	validarBotones(tira.getLS());
             //***************************************************************
             /*
              
