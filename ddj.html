@@ -9,19 +9,43 @@
 	border: 1px red solid;
 	padding:10px;
    }
+   *{
+	box-sizing:border-box;
+   }
    a {
-   color:#77f;
-   text-decoration:none;
+	color:#77f;
+	text-decoration:none;
    }
    a:visited {
-   color:green;
+	color:green;
+   }
+   #t {
+	height:400px;
+	width: 56vw;
+	overflow:scroll;
+	font-size:2em;
+	display:inline-block;
+	border: 2px black dotted;
+   }
+   #wiki {
+	height:400px;
+	width: 40vw;
+	display:inline-block;
+	
+   }
+   
+   @media only screen and (max-width: 900px) {
+	#wiki, #t {
+		width: 96vw;
+		height:50vh;
+	}
    }
    </style>
 </head>
 <body>
-<iframe name="wiki" id="wiki" style='float:right;height:400px;width:40vw;' src="https://en.m.wiktionary.org/wiki/道#Definitions"></iframe>
-<div style='height:400px;width:56vw;overflow:scroll;' id="t"></div>
 
+<div id="t"></div>
+<iframe name="wiki" id="wiki"  src="https://en.m.wiktionary.org/wiki/道#Definitions"></iframe>
 <table id="d">
 </table>
  	<script src="ddj.js"></script>
