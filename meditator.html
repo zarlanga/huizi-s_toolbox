@@ -234,11 +234,11 @@
                 ctx.fillRect(0, c.height / 2, c.width, c.height / 2);
                 ctx.stroke();
             }
-            function limpiarGrafico() {
+            function limpiarGrafico(colo) {
                 ctx.beginPath();
                 //ctx.lineWidth = "6";
                 //ctx.strokeStyle = "coral";
-                ctx.fillStyle = "blue";
+                ctx.fillStyle = colo;
                 ctx.fillRect(0, 0, c.width, c.height);
                 //ctx.rect(0, 0, 400, 200);
                 //ctx.rect(0, 200, 400, 200);
@@ -281,6 +281,7 @@
 					power=true;
 					document.getElementById("paguer").innerHTML = 'TERMINAR Y CALCULAR';
 					document.getElementById("paguer").style.backgroundColor = "#CB4335";
+					limpiarGrafico("#58D68D");
 				} else {
 					power=false;
 					document.getElementById("paguer").innerHTML = 'COMENZAR'
@@ -294,7 +295,7 @@
 					var tTotal; // array con cantidad de horas en pos [0], min en [1], seg en [2]
 					var proporcionINEX = [];
 					dataTest = "";
-					limpiarGrafico();
+					limpiarGrafico("blue");
 					for (var p = 0; p < tiemposIN.length - 1; p++) {
 						tx = (tiemposIN[p + 1] - tiemposIN[p]);
 						tIn = tiemposEX[p] - tiemposIN[p];
