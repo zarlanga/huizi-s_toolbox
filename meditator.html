@@ -24,6 +24,7 @@
 
 <!----------------->
       <style>
+	  
         .headerr h1{
           text-shadow: 3px 2px 4px darkorchid;
         }
@@ -75,6 +76,7 @@
 	}
 	
 	
+	
     @media screen and (max-width: 800px) {
     .contbot button {
       width:40%;
@@ -93,6 +95,11 @@
       </style>
       <script>
       $(document).ready(function () {
+	  
+			window.addEventListener('contextmenu', function (e) { 
+				e.preventDefault(); 
+			}, false);
+	  
           $("#displaynumME").text(indLS +1);
           if (indLS<0) $('.antME').prop('disabled', true);
 
