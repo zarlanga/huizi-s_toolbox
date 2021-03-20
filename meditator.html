@@ -64,16 +64,25 @@
     button:disabled{
       color:gray;
     }
-        .contbot{
-          margin: 0px 5px;
-        }
-        
+    .contbot{
+		margin: 0px 5px;
+	}
+		
+    #paguer {
+		width:399px;
+		background-color: #58D68D;
+		height:50px;
+	}
+	
+	
     @media screen and (max-width: 800px) {
     .contbot button {
       width:40%;
       height:30px;
      }
-  
+		#paguer {
+		width:99%;
+	}
       .contbot #displaynumME {
        width:19%;
         background-color:orange;
@@ -155,17 +164,20 @@
       </nav>
       </div>
       <br>
-      <div ontouchstart="inhalacion(event)" ontouchend="exhalacion()">
+	  
+      <div >
+		
         <div class="contbot"  >
+		<button id="paguer" onclick="calcular()" >COMENZAR</button><br>  
           <button class="antME" >Anterior</button><button id="displaynumME">sasa</button><button class="sigME" disabled="true">Siguiente</button><br>  
         </div>
-        <canvas id="myCanvas" width="400" height="400"  style="border:1px solid;background-color: coral; float:left; margin:5px "></canvas>
+        <canvas onmousedown="inhalacion(event)" onmouseup="exhalacion()" ontouchstart="inhalacion(event)" ontouchend="exhalacion()" id="myCanvas" width="400" height="400"  style="border:1px solid;background-color: coral; float:left; margin:5px "></canvas>
       </div>
         <div class="testooo">
           
       
-        <p> <strong>**** EN CONSTRUCCION****</strong> <br>Presione cualquier tecla o haga click sobre el cuadro al inhalar y sueltela al exhalar.<br><strong>En anapanasati se intenta no controlar la respiracion, solamente observarla</strong> <br> Cuando termine haga click en calcular </p>
-        <button onclick="calcular()" >calcular</button>
+        <p> <!--<strong>**** EN CONSTRUCCION****</strong> <br>-->Presione cualquier tecla o haga click sobre el cuadro al inhalar y sueltela al exhalar.<br><strong>En anapanasati se intenta no controlar la respiracion, solamente observarla</strong> <br> Cuando termine haga click en calcular </p>
+        
         <p id="resultado"></p>
           </div>
         <script type="text/javascript">
@@ -198,6 +210,7 @@
             var indLS = getLS().length -1;
             var tiemposIN = [];
             var tiemposEX = [];
+			var power = false;
             var dale = true;
             var c = document.getElementById("myCanvas");
             var ctx = c.getContext("2d");
@@ -264,53 +277,62 @@
             }
             function calcular() {
                 //dale=false;
-                var testo = "";
-                var rpm = []; //array para guardar las respiraciones por minuto (eventualmente sacar promedios parciales?)
-                var rpmAC = 0; // acumulador para calcular el promedio
-                var tr = []; // array para duracion de respiraciones
-                var tInAc = 0; //acumulador tiempo de inhalacion
-                var tExAc = 0; // acumulador tiempo exhalacion
-                var tTotal; // array con cantidad de horas en pos [0], min en [1], seg en [2]
-                var proporcionINEX = [];
-                dataTest = "";
-                limpiarGrafico();
-                for (var p = 0; p < tiemposIN.length - 1; p++) {
-                    tx = (tiemposIN[p + 1] - tiemposIN[p]);
-                    tIn = tiemposEX[p] - tiemposIN[p];
-                    tEx = tiemposIN[p + 1] - tiemposEX[p];
-                    tInAc += tIn;
-                    tExAc += tEx;
-                    proporcionINEX[proporcionINEX.length] = tIn / (tIn + tEx);
-                    tr[tr.length] = tx;
-                    rpm[rpm.length] = 60000 / tx;
-                    //rpm[rpm.length] = (60000 / tx).toFixed(2);
-                    rpmAC += rpm[p];
-                    dataTest += tIn + "IN///" + tEx + "EX||||||||";
-                    dataTest += tx / 1000 + "segundos////" + rpm[p].toFixed(2) + "rpm  <br>";
-                }
-                graficarArray(rpm, 0);
-                
-              guardarLS(tiemposIN, tiemposEX);
-              indLS = getLS().length -1
-              $("#displaynumME").text(indLS +1);
-              validarBotones(getLS());
-              
-              //graficarArray(tr, 1);
-                //graficarArray(proporcionINEX, 0);
-                tTotal = calcularHMS(tiemposIN[tiemposIN.length - 1] - tiemposIN[0]); //parametro es la diferencia de tiempo en milisegundos desde el inicio hasta el calcular
-                testo += "<br>Respiraciones por minuto promedio: " + (rpmAC / (tiemposIN.length - 1)).toFixed(2) + "<br>";
-                testo += "<br> Pico maximo: " + (Math.max.apply(null, rpm)).toFixed(2) + "rpm<br>";
-                testo += "<br> Pico minimo: " + (Math.min.apply(null, rpm)).toFixed(2) + "rpm<br>";
-                testo += "<br> Amplitud: " + (Math.max.apply(null, tr) - Math.min.apply(null, tr)) + "milisegundos <br>";
-                testo += "<br> Proporcion In/Ex: " + Math.floor((tInAc / (tExAc + tInAc)) * 100) + "% in/" + Math.floor((tExAc / (tExAc + tInAc)) * 100) + "% ex<br>";
-                //testo += "<br> Proporcion In/Ex: " +( (tInAc > tExAc) ? (tInAc/tExAc).toFixed(2) +  " Inhalacion<br>" : (tExAc/tInAc).toFixed(2) + "Exhalacion<br>" );
-                testo += "<br>Total respiraciones: " + (tiemposIN.length - 1) + "<br>";
-                testo += "<br>Tiempo total: " + tTotal[0] + " horas, " + tTotal[1] + " min,  " + tTotal[2] + "seg<br>";
-                //testo += calcularTTotal();
-                document.getElementById("resultado").innerHTML = testo;
-                document.getElementById("resultado").innerHTML += "<br>" + dataTest;
-                tiemposIN = [];
-                tiemposEX = [];
+				if (!power) {
+					power=true;
+					document.getElementById("paguer").innerHTML = 'TERMINAR Y CALCULAR';
+					document.getElementById("paguer").style.backgroundColor = "#CB4335";
+				} else {
+					power=false;
+					document.getElementById("paguer").innerHTML = 'COMENZAR'
+					document.getElementById("paguer").style.backgroundColor = "#58D68D";
+					var testo = "";
+					var rpm = []; //array para guardar las respiraciones por minuto (eventualmente sacar promedios parciales?)
+					var rpmAC = 0; // acumulador para calcular el promedio
+					var tr = []; // array para duracion de respiraciones
+					var tInAc = 0; //acumulador tiempo de inhalacion
+					var tExAc = 0; // acumulador tiempo exhalacion
+					var tTotal; // array con cantidad de horas en pos [0], min en [1], seg en [2]
+					var proporcionINEX = [];
+					dataTest = "";
+					limpiarGrafico();
+					for (var p = 0; p < tiemposIN.length - 1; p++) {
+						tx = (tiemposIN[p + 1] - tiemposIN[p]);
+						tIn = tiemposEX[p] - tiemposIN[p];
+						tEx = tiemposIN[p + 1] - tiemposEX[p];
+						tInAc += tIn;
+						tExAc += tEx;
+						proporcionINEX[proporcionINEX.length] = tIn / (tIn + tEx);
+						tr[tr.length] = tx;
+						rpm[rpm.length] = 60000 / tx;
+						//rpm[rpm.length] = (60000 / tx).toFixed(2);
+						rpmAC += rpm[p];
+						dataTest += tIn + "IN///" + tEx + "EX||||||||";
+						dataTest += tx / 1000 + "segundos////" + rpm[p].toFixed(2) + "rpm  <br>";
+					}
+					graficarArray(rpm, 0);
+					
+				  guardarLS(tiemposIN, tiemposEX);
+				  indLS = getLS().length -1
+				  $("#displaynumME").text(indLS +1);
+				  validarBotones(getLS());
+				  
+				  //graficarArray(tr, 1);
+					//graficarArray(proporcionINEX, 0);
+					tTotal = calcularHMS(tiemposIN[tiemposIN.length - 1] - tiemposIN[0]); //parametro es la diferencia de tiempo en milisegundos desde el inicio hasta el calcular
+					testo += "<br>Respiraciones por minuto promedio: " + (rpmAC / (tiemposIN.length - 1)).toFixed(2) + "<br>";
+					testo += "<br> Pico maximo: " + (Math.max.apply(null, rpm)).toFixed(2) + "rpm<br>";
+					testo += "<br> Pico minimo: " + (Math.min.apply(null, rpm)).toFixed(2) + "rpm<br>";
+					testo += "<br> Amplitud: " + (Math.max.apply(null, tr) - Math.min.apply(null, tr)) + "milisegundos <br>";
+					testo += "<br> Proporcion In/Ex: " + Math.floor((tInAc / (tExAc + tInAc)) * 100) + "% in/" + Math.floor((tExAc / (tExAc + tInAc)) * 100) + "% ex<br>";
+					//testo += "<br> Proporcion In/Ex: " +( (tInAc > tExAc) ? (tInAc/tExAc).toFixed(2) +  " Inhalacion<br>" : (tExAc/tInAc).toFixed(2) + "Exhalacion<br>" );
+					testo += "<br>Total respiraciones: " + (tiemposIN.length - 1) + "<br>";
+					testo += "<br>Tiempo total: " + tTotal[0] + " horas, " + tTotal[1] + " min,  " + tTotal[2] + "seg<br>";
+					//testo += calcularTTotal();
+					document.getElementById("resultado").innerHTML = testo;
+					//document.getElementById("resultado").innerHTML += "<br>" + dataTest;
+					tiemposIN = [];
+					tiemposEX = [];
+				}
             }
             function calcularHMS(tMS) {
                 //ahre que podria haber usado la funcion tal como estaba antes
@@ -329,12 +351,14 @@
                 //return "<br>Tiempo total: " + tHoras + " horas, " + tMin + " min " + tSeg + "seg<br>";
             }
             function exhalacion() {
-                dale = true;
-                tiemposEX[tiemposEX.length] = Date.now();
-                graficarEX();
+				if (power) {
+					dale = true;
+					tiemposEX[tiemposEX.length] = Date.now();
+					graficarEX();
+				}
             }
             function inhalacion(e) {
-                if (dale) {
+                if (dale && power) {
                     tiemposIN[tiemposIN.length] = Date.now();
                     graficarIN();
                     dale = false;
