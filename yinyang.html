@@ -92,7 +92,7 @@
 
                 Elegir cantidad de niveles<input type="number" name="lvls" id="lvls" oninput="clickNiveles(this.value)" min="0" max="10" step="1" value="4">
                 <br>
-                <input type="checkbox" onchange="clickCheck3()" checked="checked">vertical
+                <input type="checkbox" onchange="clickCheck3()" >vertical
                 <br>
                 <input type="checkbox" onchange="clickCheck1()" checked="checked">orden 1
                 <br>
@@ -124,7 +124,7 @@
             var lvls = 4;
             var orden1 = true;
             var orden2 = true;
-            var vertical = true;
+            var vertical = false;
             var mover = false;
             var bardo = false;
             var cont = 0;
