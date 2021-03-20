@@ -1,9 +1,21 @@
 <!DOCTYPE html>
  <html lang="es">
  <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1">
-   <title>ddj</title>
+	<meta charset="UTF-8">
+	<title>道德經 /// Huizi's toolbox</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" href="icon.png" type="image/gif" sizes="16x16">
+    <link rel="stylesheet" type="text/css" href="styles/style.css">	
+	
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-132762032-3"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-132762032-3');
+	</script>
    <style>
    table, td{
 	border: 1px red solid;
@@ -19,11 +31,11 @@
 	color:#77f;
 	text-decoration:none;
    }
-   a:visited {
+   #t a:visited {
 	color:green;
    }
    #t {
-	height:60vh;
+	height:40vh;
 	width: 56vw;
 	overflow:scroll;
 	font-size:2em;
@@ -32,7 +44,7 @@
 	text-align:center;
    }
    #wiki {
-	height:60vh;
+	height:40vh;
 	width: 40vw;
 	display:inline-block;
 	/*opacity:0.5;*/
@@ -76,6 +88,27 @@
 </head>
 <body>
 
+      <div class="navcont">
+       
+     
+      <nav class="menuD">
+	    <!--<img  src="icon.png"/>-->
+	    <img src="https://cdn.glitch.com/a5770f3f-8039-4fd7-96d4-f99b40d52f79%2Fpakua.png"><img class="borger" src="https://cdn.glitch.com/a5770f3f-8039-4fd7-96d4-f99b40d52f79%2Fborguer.png?1558581332716">
+		  <!--<a class="menuI" target="myIframe" href="https://zarlanga.github.io/yinyang/public_html/" >Yin-Yang</a>
+      <a class="menuI" target="myIframe" href="https://zarlanga.github.io/i-ching/public_html/" >I-Ching</a>
+		  <a class="menuI" target="myIframe" href="https://zarlanga.github.io/Meditator/public_html/medi.html" >Meditator</a>
+		  <a class="menuI" target="myIframe" href="https://zarlanga.github.io/GraficadorHTML/public_html/" >Graficador</a>-->
+        <br>
+        <a class="menuI"  href="index.html" >Home</a>
+        <a class="menuI"  href="yinyang.html" >Yin-Yang</a>
+        <a class="menuI"  href="i-ching.html" >I-Ching</a>
+        <a class="menuI"  href="meditator.html" >Meditator</a>
+		<a class="menuI"  href="ddj.html" >道德經</a>
+        
+		
+      </nav>
+      </div>
+	  </br>
 <div id="t"></div>
 <iframe name="wiki" id="wiki"  src="https://en.m.wiktionary.org/wiki/道#Definitions"></iframe>
 <div id="inputeo">
