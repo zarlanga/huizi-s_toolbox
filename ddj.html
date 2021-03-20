@@ -9,6 +9,9 @@
 	border: 1px red solid;
 	padding:10px;
    }
+   body{
+   /*background-image:url(lao.jpg);*/
+   }
    *{
 	box-sizing:border-box;
    }
@@ -20,24 +23,53 @@
 	color:green;
    }
    #t {
-	height:400px;
+	height:60vh;
 	width: 56vw;
 	overflow:scroll;
 	font-size:2em;
 	display:inline-block;
 	border: 2px black dotted;
+	text-align:center;
    }
    #wiki {
-	height:400px;
+	height:60vh;
 	width: 40vw;
 	display:inline-block;
+	/*opacity:0.5;*/
 	
    }
+   #dicc {
+   height:30vh;
+	width: 96vw;
+	display:inline-block;
+   }
+   
+   #inputeo{
+		width:99vw;
+		background-color:blue;
+		margin:auto;
+		text-align: center;
+		padding:10px;
+		display:inline-block;
+		
+		
+   }
+   input {
+	text-align:center;
+   }
+   #wiki, #t, #dicc {
+   opacity:0.8;
+   }
+   body {
+   background-color:pink;
+   }
+   
    
    @media only screen and (max-width: 900px) {
 	#wiki, #t {
 		width: 96vw;
-		height:50vh;
+		height:35vh;
+		
 	}
    }
    </style>
@@ -46,6 +78,12 @@
 
 <div id="t"></div>
 <iframe name="wiki" id="wiki"  src="https://en.m.wiktionary.org/wiki/道#Definitions"></iframe>
+<div id="inputeo">
+<input id='inputext' type="text" value="way"></input>
+<button onclick="traduciralcristiano()">traducir</button>
+</div>
+</div>
+<iframe name="dicc" id="dicc"  src="https://es.wiktionary.org/wiki/way#Ingl%C3%A9s"></iframe>
 <table id="d">
 </table>
  	<script src="ddj.js"></script>

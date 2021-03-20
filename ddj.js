@@ -12,4 +12,9 @@ for (x of dao1){
 	else dao2 += x;
 }
 
+function traduciralcristiano() {
+	var u = `https://es.wiktionary.org/wiki/${document.getElementById('inputext').value}#Ingl%C3%A9s`
+	document.getElementById('dicc').setAttribute('src',u) 
+}
+
 document.getElementById("t").innerHTML = dao2;
