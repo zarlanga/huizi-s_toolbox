@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="icon" href="icon.png" type="image/gif" sizes="16x16">
     <link rel="stylesheet" type="text/css" href="styles/style.css">	
-	
+	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-132762032-3"></script>
 	<script>
@@ -43,6 +43,8 @@
    table, td{
 	border: 1px red solid;
 	padding:10px;
+	background-color: #555;
+	color:white;
    }
    body{
    /*background-image:url(lao.jpg);*/
@@ -81,8 +83,8 @@
    }
    
    #inputeo{
-		width:99vw;
-		background-color:blue;
+		width:97vw;
+		background-color:silver;
 		margin:auto;
 		text-align: center;
 		padding:10px;
@@ -97,14 +99,15 @@
    opacity:0.8;
    }
    body {
-   background-color:pink;
+   background-color:#555;
    }
    
    
    @media only screen and (max-width: 900px) {
-	#wiki, #t {
-		width: 96vw;
+	#wiki, #t, #dicc {
+		width: 90vw;
 		height:35vh;
+		margin:0 5vw;
 		
 	}
 	
@@ -114,6 +117,15 @@
 	}
    }
    </style>
+   <!--<script>
+      $(document).ready(function () {
+		$("#displaynumDD").text("1");
+          //if (indLS<0) (--- hacer un local storage para que te guarde el capitulo y el ultimo caracter mirado? si es por eso todos los caracteres mirados)
+		  $('.antDD').prop('disabled', true);
+		  
+      });
+      </script>
+	-->
 </head>
 <body>
 	
@@ -147,12 +159,15 @@
       </nav>
       </div>
 	  </br>
+<div id="inputeo">
+<button id="antDD" onclick="elegirCapitulo(--document.getElementById('caps').value)">Anterior</button>
+<input type="number" name="caps" id="caps" oninput="elegirCapitulo(this.value)" min="1" max="81" step="1" value="1">
+<button id="sigDD" onclick="elegirCapitulo(++document.getElementById('caps').value)">Siguiente</button>
+</div>
+
 <div id="t"></div>
 <iframe name="wiki" id="wiki"  src="https://en.m.wiktionary.org/wiki/道#Definitions"></iframe>
-<div id="inputeo">
-<input id='inputext' type="text" value="way"></input>
-<button onclick="traduciralcristiano()">traducir</button>
-</div>
+
 </div>
 <iframe name="dicc" id="dicc"  src="https://es.wiktionary.org/wiki/way#Ingl%C3%A9s"></iframe>
 <table id="d">
