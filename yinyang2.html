@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Taiji II /// Huizi's toolbox</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="icon.png" type="image/gif" sizes="16x16">
+<meta name="description" content="A collection of web toys made with a taoist orientation: i-ching, meditation tracker, etc"/>
+      <meta name="keywords" content="taoism,i-ching,i ching, iching, meditation, buddhism, buddism, mindfulness">
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-132762032-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-132762032-3');
+</script>
+
+
+
+<!----------------->
+
+        <link rel="stylesheet" type="text/css" href="styles/style.css">
+		
+	  <style>
+		  .headerr h1{
+			text-shadow: 3px 2px 4px goldenrod;
+		  }
+			
+		  body{
+			background:url(img/yinyangback.jpg) no-repeat fixed;
+			background-size: cover;
+			background-position: center center;
+		  }
+      </style>
+ <body>
+      
+	<div class="headerr">
+		<div class="headcontain">
+			<img src="img/yinyanghead.jpg"/>
+		   <h1>
+			 Yin Yang /// Huizi's toolbox 
+		   </h1>  
+       </div>
+     </div>
+	  <div class="navcont">
+ 		<nav class="menuD">
+			<!--<img  src="icon.png"/>-->
+			<img src="img/menupakua.png"><img class="borger" src="img/menuborger.png">
+			  <!--<a class="menuI" target="myIframe" href="https://zarlanga.github.io/yinyang/public_html/" >Yin-Yang</a>
+		  <a class="menuI" target="myIframe" href="https://zarlanga.github.io/i-ching/public_html/" >I-Ching</a>
+			  <a class="menuI" target="myIframe" href="https://zarlanga.github.io/Meditator/public_html/medi.html" >Meditator</a>
+			  <a class="menuI" target="myIframe" href="https://zarlanga.github.io/GraficadorHTML/public_html/" >Graficador</a>-->
+			<br>
+			<a class="menuI"  href="index.html" >Home</a>
+			<a class="menuI"  href="yinyang.html" >Yin-Yang</a>
+			<a class="menuI"  href="i-ching.html" >I-Ching</a>
+			<a class="menuI"  href="meditator.html" >Anapanasati</a>
+			<a class="menuI"  href="ddj.html" >道德經</a>
+		</nav>
+	</div>
+	<div id="test" style='float:left'>
+		<h3><input id="mov" type="checkbox" onchange="clickCheck()" >MOVER!!  </h3>
+		<canvas id="myCanvas" width="500" height="500"  style="border:1px solid;background-color: gray;"></canvas>
+	</div>
+	<script>
+	var canvas = document.getElementById("myCanvas");
+	var ctx = canvas.getContext("2d");
+	var gulo = 0;
+	var inc =0.015;
+	var eje = canvas.getAttribute("width") / 2;
+	var col = ["#fff","#000"];
+	var moneda = false;
+	var pepe;
+	class CirCulo {
+		
+		dibujar(lvl) {
+			var v= this.calcularValores(lvl);
+			ctx.fillStyle =v.colo;
+			ctx.beginPath();
+			ctx.arc(v.x, v.y, v.r, 0, Math.PI * 2);
+				//ctx.arc(x,y,r,-Math.PI/2 - this.rot*cont,Math.PI/2-this.rot*cont);
+				//ctx.stroke();
+				/*ctx.fill();
+				 ctx.fillStyle = col2;
+				 ctx.beginPath();
+				 ctx.arc(x,y,r,Math.PI/2-this.rot*cont,1.5*Math.PI-this.rot*cont); */
+			ctx.fill();
+			
+		}
+		calcularValores(lvl) {
+			var ret
+			if(lvl ==0) {
+				
+				//if (false) {
+				if (gulo <= Math.PI) {
+				
+					ret = {
+						r:  eje/4 *(gulo/Math.PI )+eje/4,
+						
+						x: eje + Math.cos(gulo- Math.PI/2) * eje /2,
+						
+						y: eje + Math.sin(gulo- Math.PI/2) * eje /2,
+						colo: col[0+moneda]
+					}
+				} else {
+					ret= {
+						r:  (gulo/(Math.PI*2) )*eje,
+						x:eje + Math.cos(gulo- Math.PI/2) * ((eje /2) - eje /2 * ((gulo-Math.PI)/(Math.PI) )),
+						y: eje + Math.sin(gulo- Math.PI/2) * ((eje /2) - eje /2 * ((gulo-Math.PI)/(Math.PI) )),
+						colo: col[0+moneda]
+					}
+				}
+				
+			} else if (lvl == 1) {
+				ret = {
+					r:  eje/4 *((gulo-Math.PI)/Math.PI ),
+					
+					x: eje + Math.cos(gulo- Math.PI/2) * eje /2,
+					
+					y: eje + Math.sin(gulo- Math.PI/2) * eje /2,
+					colo: col[0+!moneda]
+				}
+			} else {
+				ret = {
+					r: eje,
+					x: eje,
+					y: eje,
+					colo:col[0+!moneda]
+				}
+			}
+			//console.log(ret.r);
+			return ret;
+		}
+	}
+	
+	function clickCheck(){
+		var boo = document.getElementById("mov").checked
+		if (boo) {
+			pepe = setInterval(function(){ daleMasa()},40);
+		} else {
+			clearInterval(pepe);
+		}
+	}
+	
+	function daleMasa(){
+		if (gulo >= (Math.PI *2)) {
+			/*clearInterval(pepe);
+			console.log("laconchehetumarealboys");
+			*/
+			moneda = !moneda;
+			gulo = 0;
+			//col = moneda ? "#000" : "#fff";
+		}
+		
+		var culo = new CirCulo();
+		culo.dibujar(2);
+
+		if (gulo >= Math.PI) {
+			
+			culo.dibujar(0);
+			culo.dibujar(1);
+		
+		} else {
+			var culo = new CirCulo();
+			culo.dibujar(0);
+			
+		}
+			gulo += inc;
+	}
+	
+	
+	
+	</script>
+ </body>
