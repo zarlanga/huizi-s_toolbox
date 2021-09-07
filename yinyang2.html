@@ -40,7 +40,7 @@
 		<div class="headcontain">
 			<img src="img/yinyanghead.jpg"/>
 		   <h1>
-			 Yin Yang /// Huizi's toolbox 
+			 Yin Yang 二 /// Huizi's toolbox 
 		   </h1>  
        </div>
      </div>
@@ -58,26 +58,35 @@
 			<a class="menuI"  href="i-ching.html" >I-Ching</a>
 			<a class="menuI"  href="meditator.html" >Anapanasati</a>
 			<a class="menuI"  href="ddj.html" >道德經</a>
-			<a class="menuI"  href="yinyang2.html" >Yin-Yang 2</a>
+			<a class="menuI"  href="yinyang2.html" >Yin-Yang 二</a>
 		</nav>
 	</div>
 	<div id="test" style='float:left'>
 		<h3><input id="mov" type="checkbox" onchange="clickCheck()" >MOVER!!  </h3>
 		<canvas id="myCanvas" width="500" height="500"  style="border:1px solid;background-color: gray;"></canvas>
 	</div>
+	<div id="joda" style='float:right'>
+		<h3><input id="epi" type="checkbox" onchange="epilepsia = !epilepsia" >EPILEPSIAHHH!!</h3>
+		<h3><input id="deca" type="checkbox" onchange="decadencia= !decadencia; daleMasa()" >DECADENCIAH!!</h3>
+		<h3><input id="circu" type="checkbox" onchange="circunferencia= !circunferencia; daleMasa()" >CIRCUNFERENCIA!!</h3>
+		</div>
 	<script>
 	var canvas = document.getElementById("myCanvas");
 	var ctx = canvas.getContext("2d");
 	var gulo = 0;
-	var inc =0.015;
+	var inc =0.040;
 	var eje = canvas.getAttribute("width") / 2;
 	var col = ["#fff","#000"];
-	var moneda = false;
+	var moneda = true;
+	var epilepsia = false;
+	var decadencia = false;
+	var circunferencia = false;
 	var pepe;
 	class CirCulo {
 		
 		dibujar(lvl) {
 			var v= this.calcularValores(lvl);
+			
 			ctx.fillStyle =v.colo;
 			ctx.beginPath();
 			ctx.arc(v.x, v.y, v.r, 0, Math.PI * 2);
@@ -95,35 +104,46 @@
 			if(lvl ==0) {
 				
 				//if (false) {
-				if (gulo <= Math.PI) {
+				//-1* x e y 
+				// moneda = !moneda
+				//floor Math.floor(100*(
+				if (gulo <= Math.PI && !circunferencia) {
 				
 					ret = {
-						r:  eje/4 *(gulo/Math.PI )+eje/4,
+						r:   eje/4 *(gulo/Math.PI )+eje/4,
 						
-						x: eje + Math.cos(gulo- Math.PI/2) * eje /2,
+						x: eje + Math.cos(Math.floor(100*(gulo- Math.PI/2))/100) * eje /2 * (decadencia ? -1 : 1),
 						
-						y: eje + Math.sin(gulo- Math.PI/2) * eje /2,
+						y: eje +  Math.sin(Math.floor(100*(gulo- Math.PI/2))/100) * eje /2 * (decadencia ? -1 : 1),
 						colo: col[0+moneda]
 					}
 				} else {
 					ret= {
 						r:  (gulo/(Math.PI*2) )*eje,
-						x:eje + Math.cos(gulo- Math.PI/2) * ((eje /2) - eje /2 * ((gulo-Math.PI)/(Math.PI) )),
-						y: eje + Math.sin(gulo- Math.PI/2) * ((eje /2) - eje /2 * ((gulo-Math.PI)/(Math.PI) )),
+						x:eje + Math.cos(Math.floor(100*(gulo- Math.PI/2))/100) * ((eje /2) - eje /2 * ((gulo-Math.PI)/(Math.PI) ))* (decadencia ? -1 : 1)  ,
+						y: eje +Math.sin(Math.floor(100*(gulo- Math.PI/2) )/100)* ((eje /2) - eje /2 * ((gulo-Math.PI)/(Math.PI) ))* (decadencia ? -1 : 1) ,
 						colo: col[0+moneda]
 					}
 				}
 				
-			} else if (lvl == 1) {
+			} else if (lvl == 1 && !circunferencia) {
 				ret = {
 					r:  eje/4 *((gulo-Math.PI)/Math.PI ),
 					
-					x: eje + Math.cos(gulo- Math.PI/2) * eje /2,
+					x: eje + Math.cos(Math.floor(100*(gulo- Math.PI/2))/100) * eje /2 * (decadencia ? -1 : 1),
 					
-					y: eje + Math.sin(gulo- Math.PI/2) * eje /2,
+					y: eje +Math.sin(Math.floor(100*(gulo- Math.PI/2))/100) * eje /2 * (decadencia ? -1 : 1),
 					colo: col[0+!moneda]
 				}
-			} else {
+				
+			}else if (lvl == 1 && circunferencia) {
+				ret= {
+						r:  (gulo/(Math.PI*2) )*eje,
+						x:eje + Math.cos(Math.floor(100*(gulo- Math.PI/2))/100) * ((eje /2) - eje /2 * ((gulo-Math.PI)/(Math.PI) ))* (decadencia ? -1 : 1)  ,
+						y: eje +Math.sin(Math.floor(100*(gulo- Math.PI/2) )/100)* ((eje /2) - eje /2 * ((gulo-Math.PI)/(Math.PI) ))* (decadencia ? -1 : 1) ,
+						colo: col[0+moneda]
+					}
+			} 	else if (lvl == 2) {
 				ret = {
 					r: eje,
 					x: eje,
@@ -139,13 +159,15 @@
 	function clickCheck(){
 		var boo = document.getElementById("mov").checked
 		if (boo) {
-			pepe = setInterval(function(){ daleMasa()},40);
+			pepe = setInterval(function(){ daleMasa()},50);
 		} else {
 			clearInterval(pepe);
 		}
 	}
 	
 	function daleMasa(){
+		if (Math.floor(100*gulo % (inc*4))/100 ==0 && epilepsia) moneda = !moneda ;
+		
 		if (gulo >= (Math.PI *2)) {
 			/*clearInterval(pepe);
 			console.log("laconchehetumarealboys");
@@ -171,7 +193,7 @@
 			gulo += inc;
 	}
 	
-	
+	daleMasa();
 	
 	</script>
  </body>
