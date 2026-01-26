@@ -1,7 +1,7 @@
 <input type="number" value="1988" onchange="calculateYear(this.value)"> </input>.
 <br>
 <h3 id="output"> nani?</h3>
-<p>elements should be right now</p>
+
 <script>
 function calculateYear (year=-1605) {
 
@@ -10,7 +10,7 @@ var elements = ["wood","wood","fire","fire","earth","earth","metal","metal","wat
 
 
 var calc = 2636 + parseInt(year);
-console.log(calc)
+
 document.getElementById("output").innerHTML = "" + animals[calc % 12] +"  " + elements[calc % 10]
 
 }
