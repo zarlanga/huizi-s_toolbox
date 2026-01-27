@@ -1,19 +1,38 @@
-<input type="number" value="1988" onchange="calculateYear(this.value)"> </input>.
-<br>
-<h3 id="output"> nani?</h3>
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Zodiac /// Huizi's toolbox</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="icon.png" type="image/gif" sizes="16x16">
+<meta name="description" content="A collection of web toys made with a taoist orientation: i-ching, meditation tracker, etc"/>
+      <meta name="keywords" content="taoism,i-ching,i ching, iching, meditation, buddhism, buddism, mindfulness">
+</head>
+<body style="text-align:center;font-size:2em;background-color:silver">
+
+
+<br><br><br><br><br><br>
+<input type="number" value="1988" onchange="calculateYear(this.value)" style="color:;font-size:2em"> </input>.
+<br><br><br><br><br>
+<h1 id="output"> nani?</h1>
 
 <script>
 function calculateYear (year=-1605) {
 
 var animals = ["Rat", "Ox","Tiger","Hare","Dragon","Snake","Horse","Goat","Monkey","Rooster","Dog","Pig"]
-var elements = ["wood","wood","fire","fire","earth","earth","metal","metal","water","water"]
-
+var elements = ["Wood","Wood","Fire","Fire","Earth","Earth","Metal","Metal","Water","Water"]
+var colors = ["green", "green", "red", "red", "sienna", "sienna", "white", "white", "black","black"]
 
 var calc = 2636 + parseInt(year);
 
-document.getElementById("output").innerHTML = "" + animals[calc % 12] +"  " + elements[calc % 10]
+document.getElementById("output").innerHTML = "" +  elements[calc % 10]  +"  " +animals[calc % 12]
+
+
+document.getElementById("output").style.color = colors[calc % 10] 
 
 }
 
 calculateYear(1988)
 </script>
+</body>
