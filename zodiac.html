@@ -23,14 +23,15 @@ function calculateYear (year=-1605) {
 var animals = ["Rat", "Ox","Tiger","Hare","Dragon","Snake","Horse","Goat","Monkey","Rooster","Dog","Pig"]
 var elements = ["Wood","Wood","Fire","Fire","Earth","Earth","Metal","Metal","Water","Water"]
 var colors = ["green", "green", "red", "red", "sienna", "sienna", "white", "white", "black","black"]
+var align = ["-5px 0","-5px 0", "0 -5px","0 -5px", "0 0","0 0", "5px 0","5px 0", "0 5px", "0 5px"] //"5px 0", "0 5px"
 
 var calc = 2636 + parseInt(year);
 
 document.getElementById("output").innerHTML = "" +  elements[calc % 10]  +"  " +animals[calc % 12]
 
 
-document.getElementById("output").style.color = colors[calc % 10] 
-document.getElementById("output").style.textShadow = "0 0 24px "+ colors[calc % 10]
+document.getElementById("output").style.color =  "silver" //colors[calc % 10] 
+document.getElementById("output").style.textShadow = align[calc % 10] + " 24px "+ colors[calc % 10]
 }
 
 calculateYear(1988)
