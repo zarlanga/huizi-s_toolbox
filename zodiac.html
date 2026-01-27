@@ -30,7 +30,7 @@ document.getElementById("output").innerHTML = "" +  elements[calc % 10]  +"  " +
 
 
 document.getElementById("output").style.color = colors[calc % 10] 
-
+document.getElementById("output").style.textShadow = "0 0 24px "+ colors[calc % 10]
 }
 
 calculateYear(1988)
